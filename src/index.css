@@ -11,3 +11,104 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body{
+  display:flex;
+  flex-direction: column;
+}
+
+header{
+  text-align: center;
+  color:white;
+  background-color: black;
+  padding: 30px 0;
+}
+
+header > h1{
+  margin:0;
+}
+
+.library{
+  padding: 20px 30px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position:relative;
+}
+
+.form, .form-inputs{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form{
+  padding: 20px;
+  background-color:white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  width: fit-content;
+  position:absolute;
+  top: 50%;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+
+  align-items: center;
+}
+
+
+.form-inputs > input{
+  font-size: 2rem;
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 2px solid black;
+}
+
+#form-title{
+  margin:0;
+}
+
+.form-buttons{
+  display:flex;
+  gap: 20px;
+  width:100%;
+}
+
+.form-buttons > button, #add-book{
+  padding: 5px 20px;
+  font-size: 2rem;
+  width: 100%;
+  cursor:pointer;
+}
+
+.cards{
+  text-align: center;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px,1fr));
+  gap:20px;
+  width:100%
+}
+
+.card{
+  padding: 20px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.6);
+  border-radius: 10px;
+}
+
+#book-title{
+  margin-top:0;
+}
+
+.toggle-read{
+  width: 100%;
+  border:none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color:white;
+  cursor:pointer;
+  font-size: 2rem;
+  font-weight:bold;
+}
