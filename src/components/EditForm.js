@@ -1,11 +1,11 @@
 import DataContext from "../contexts/DataContext";
 import { useContext } from "react";
 
-const Form = () => {
-  const {formData, handleFormChange, addBook ,toggleShowForm} = useContext(DataContext);
+const EditForm = () => {
+  const {formData, handleFormChange, updateBook ,toggleShowEditForm} = useContext(DataContext);
   return(
     <div className="form">
-      <h1 id="form-title">Add Book</h1>
+      <h1 id="form-title">Edit Book</h1>
       <div className="form-inputs">
         <input
           type="text"
@@ -31,11 +31,11 @@ const Form = () => {
       </div>
       
       <div className="form-buttons">
-        <button onClick={addBook}>Confirm</button>
-        <button onClick={toggleShowForm}>Cancel</button>
+        <button onClick={updateBook}>Confirm</button>
+        <button onClick={toggleShowEditForm}>Cancel</button>
       </div>
     </div>
   )
 }
 
-export default Form;
+export default EditForm;

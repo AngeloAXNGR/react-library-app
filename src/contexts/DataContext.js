@@ -7,11 +7,14 @@ const DataContext = createContext();
 export const DataProvider = ({children}) =>{
   const [formData, setFormData] = useState({title: '', author: '', pages: ''});
   const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [books, setBooks] = useState([]);
+  const [currentlyEditing, setCurrentlyEditing] = useState(() => {return null});
   const bookCollectionRef = collection(db, "books");
 
   const toggleShowForm = () =>{
     setShowForm(prevShow => {return !prevShow});
+    setFormData({title: '', author: '', pages: ''});
   }
 
   const handleFormChange = (event) => {
@@ -22,6 +25,16 @@ export const DataProvider = ({children}) =>{
       }
     })
   }
+
+  const setEdit = (id) =>{
+    setCurrentlyEditing(id);
+    toggleShowEditForm();
+  }
+
+  const toggleShowEditForm = () => {
+    setShowEditForm(prevShow => {return !prevShow});
+    setFormData({title: '', author: '', pages: ''});
+  }
   
   const addBook = () => {
     addDoc(bookCollectionRef, {title: formData.title, author: formData.author, pages: Number(formData.pages), isRead:false})
@@ -31,6 +44,14 @@ export const DataProvider = ({children}) =>{
   const deleteBook = (id) => {
     const bookDoc = doc(db, "books", id);
     deleteDoc(bookDoc);
+  }
+
+  const updateBook = () => {
+    const currentBook = books.find(book => book.id === currentlyEditing)
+    const newBookFields = {title: formData.title, author: formData.author, pages: Number(formData.pages), isRead:currentBook.isRead}
+    const bookDoc = doc(db, "books", currentBook.id);
+    updateDoc(bookDoc,newBookFields);
+    toggleShowEditForm();
   }
 
   const toggleRead = (id, isRead) => {
@@ -50,7 +71,22 @@ export const DataProvider = ({children}) =>{
   },[])
 
   return(
-    <DataContext.Provider value={{formData, showForm, toggleShowForm, handleFormChange, books, addBook,deleteBook, toggleRead}}>{children}</DataContext.Provider>
+    <DataContext.Provider 
+      value={
+        {
+          formData, 
+          showForm, 
+          showEditForm,
+          toggleShowForm,
+          toggleShowEditForm, 
+          handleFormChange, 
+          books, 
+          addBook,
+          deleteBook, 
+          updateBook,
+          currentlyEditing,
+          setEdit,
+          toggleRead}}>{children}</DataContext.Provider>
   )
 }
 

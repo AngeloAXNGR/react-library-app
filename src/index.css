@@ -77,12 +77,23 @@ header > h1{
   width:100%;
 }
 
-.form-buttons > button, #add-book{
+.form-buttons > button,.card-buttons > button, #add-book{
   padding: 5px 20px;
   font-size: 2rem;
-  width: 100%;
   cursor:pointer;
 }
+
+.card-buttons{
+  display:flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.card-buttons > button{
+  width: 100%;
+}
+
 
 .cards{
   text-align: center;
